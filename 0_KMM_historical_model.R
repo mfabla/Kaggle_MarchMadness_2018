@@ -96,4 +96,13 @@ regular_df <- inner_join(season_stats_mean, season_stats_sum, by = c('Season', "
                 FTP.mean = FTM.sum/FTA.sum,
                 TA.mean = (Stl.sum - TO.sum)/Games)
 
-rm(wdiff_stats, ldiff_stats, win_stats, loss_stats, season_stats_mean, season_stats_sum)               
+rm(wdiff_stats, ldiff_stats, win_stats, loss_stats, season_stats_mean, season_stats_sum)  
+
+
+# build conference tourney data -------------------------------------------
+
+conf_tourney_df <- conference_tourney %>%
+  dplyr::group_by(Season, ConfAbbrev, WTeamID) %>%
+  dplyr::summarise(Wins_CT = n()) %>%
+  dplyr::rename(TeamID = WTeamID,
+                Conf = ConfAbbrev)
