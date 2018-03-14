@@ -175,6 +175,11 @@ pred_log <- predict(model_log,
                 ID = `final_df[, c(\"ID\")]`) %>%
   dplyr::select(ID, Pred)
 
+bracket_ref <- final_df[, c("ID", "FirstTeam_TeamName", "SecondTeam_TeamName")] %>%
+  dplyr::inner_join(pred_gbm_1, by = c("ID")) %>%
+  dplyr::rename(Pred_gbm = Pred) %>%
+  dplyr::inner_join(pred_log, by = c("ID")) %>%
+  dplyr::rename(Pred_log = Pred)
 
 # export ------------------------------------------------------------------
 
@@ -183,3 +188,6 @@ write.csv(pred_gbm_1, file = "Kaggle_MarchMad18_gbm.csv", row.names = F)
 
 #log model
 write.csv(pred_log, file = "Kaggle_MarchMad18_log.csv", row.names = F)
+
+#bracket ref
+write.csv(bracket_ref, file = "2018_MM_Bracket_Pred.csv")
