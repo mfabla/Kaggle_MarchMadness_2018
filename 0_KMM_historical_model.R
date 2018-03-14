@@ -295,9 +295,14 @@ modelvalues <- resamples(list(rf = model_rf.1,
 summary(modelvalues)
 
 # Accuracy 
-# Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA's
+#           Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA's
 # rf  0.6323529 0.6534161 0.6642157 0.6817416 0.7137681 0.7647059    0
 # gbm 0.6086957 0.6592072 0.7101449 0.6977293 0.7275880 0.7647059    0
 # svm 0.5588235 0.6043798 0.6086957 0.6232810 0.6666667 0.6714286    0
 # nn  0.5507246 0.6182864 0.6568627 0.6585422 0.7071429 0.7794118    0
 # log 0.5588235 0.6738613 0.6934143 0.6816228 0.7044118 0.7391304    0
+
+
+# export top 2 models -----------------------------------------------------
+
+save(model_gbm.1, model_log, file = "top2_kmm_models.RData")
